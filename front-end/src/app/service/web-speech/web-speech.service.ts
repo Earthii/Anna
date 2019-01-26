@@ -10,7 +10,6 @@ interface IWindow extends Window {
 })
 export class WebSpeechService {
   recognition = null;
-  recording: Boolean;
   final_transcript: string;
 
   constructor() {
@@ -21,10 +20,12 @@ export class WebSpeechService {
 
     this.recognition.onresult = event => {
       let interim_transcript = '';
-
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
-          this.final_transcript += event.results[i][0].transcript;
+          this.final_transcript = event.results[i][0].transcript;
+          setTimeout(() => {
+            this.userStoppedTalking();
+          }, 1000);
         } else {
           interim_transcript += event.results[i][0].transcript;
         }
@@ -37,18 +38,23 @@ export class WebSpeechService {
       final_span.innerHTML = this.linebreak(this.final_transcript);
       interim_span.innerHTML = this.linebreak(interim_transcript);
     };
-  }
 
+    this.recognition.onspeechstart = event => {
+      console.log('speech start');
+    };
+
+    this.recognition.onspeechend = event => {
+      console.log('speech end');
+    };
+  }
   toggle() {
     this.final_transcript = '';
     this.recognition.lang = 'en-US';
-    if (!this.recording) {
-      this.recognition.start();
-      this.recording = true;
-    } else {
-      this.recognition.stop();
-      this.recording = false;
-    }
+    this.recognition.start();
+  }
+
+  private userStoppedTalking() {
+    // this.recognition.stop();
   }
 
   private capitalize(s) {

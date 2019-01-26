@@ -1,17 +1,17 @@
-import { WebSpeechService } from './service/web-speech.service';
-import { Component } from '@angular/core';
+import { WebSpeechService } from './service/web-speech/web-speech.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Anna';
 
   constructor(private webSpeech: WebSpeechService) {}
 
-  toggleRecord() {
+  ngOnInit() {
     this.webSpeech.toggle();
   }
 }
