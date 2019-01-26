@@ -1,8 +1,15 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
+<div [className]="'container'">
+  <div [className]="'header'">
+    <!-- <a><img [className]="'logo'" src="../assets/td-logo.png"></a> -->
+    <h1 [className]="'title'">Welcome to {{ title }}</h1>
+    <label><input type="checkbox" [className]="'toggleLanguage'" value="value">Enable French</label>
+  </div>
+  <div [className]="'searchContainer'">
+    <input [className]="'input'" type="input" placeholder="Say your garbage sir">   
+    <a href="#" [className]="'btn'"><i class="fas fa-search"></i></a>
+  </div>
+
 </div>
 <button id="start" (click)="toggleRecord()">
   Toggle Recognition
