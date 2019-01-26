@@ -3,7 +3,7 @@ var router = express.Router();
 var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
+router.get('/watson', function(req, res, next) {
   var naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
     version: '2018-11-16',
     iam_apikey: process.env.WATSON_API_KEY,

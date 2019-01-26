@@ -1,0 +1,105 @@
+.container {
+    width:80%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    height: 100px;
+    background: linear-gradient(to right, #f8dd88, #f4c739);
+    border: 3px solid black;
+}
+
+.title {
+    height: 100%;
+    flex: 1 1 60%;
+    text-align: left;
+}
+
+.logo {
+    height: 50px;
+    width: 50px;
+}
+
+label {
+    align-self: flex-end;
+    flex: 1 1 20%;
+}
+
+// the checkbox / toggle container
+.toggleLanguage {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 30px;
+    width: 80px;
+    background: linear-gradient(0deg, #333, #000);
+    -webkit-appearance: none;
+    outline: none;
+    border-radius: 30px;
+    box-shadow: 0 0 0 4px #353535; 
+}
+// background of checkbox when its checked
+input:checked[type="checkbox"] {
+    background: linear-gradient(to right, #e3272b, #fe2e2e);
+}
+// the bar/slide inside the checkbox
+input[type="checkbox"]:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 30px;
+    width: 52px;
+    background: linear-gradient(0deg, #000, #6b6b6b);
+    border-radius: 30px;
+    box-shadow: 0 0 0 1px #232323;
+    transform: scale(.98, .96);
+    transition: 0.5s;
+}
+
+// adds the 'trasition' for the bar inside
+input:checked[type="checkbox"]:before{
+    left: 28px;
+    box-shadow: 0 0 1px #000,
+}
+
+// the dot inside the checkbox
+input[type="checkbox"]:after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 2px);
+    left: 40px;
+    height: 4px;
+    width: 4px;
+    background: linear-gradient(0deg, #6b6b6b, #000);
+    border-radius: 50%;
+    transition: 0.5s;
+}
+
+// adds the 'trasition' for the dot inside
+input:checked[type="checkbox"]:after{
+    background: red;
+    left: 65px;
+    box-shadow: 0 0 5px #13b3ff, 0 0 15px #13b3ff;
+}
+
+.searchContainer {
+    display: flex;
+    flex: 1 1 80%;
+    justify-content: space-between;
+    height: 50px;
+    margin-top: 20px;
+    .input {
+        flex: 1 1 75%;
+        padding-right: 10px;
+        border: 3px solid black;
+    }
+
+    .btn {
+        flex: 1 0 5%;
+    }
+}
