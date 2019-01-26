@@ -1,3 +1,4 @@
+import { WebSpeechService } from './service/web-speech.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Anna';
+
+  constructor(private webSpeech: WebSpeechService) {}
+
+  toggleRecord() {
+    this.webSpeech.toggle();
+  }
 }
