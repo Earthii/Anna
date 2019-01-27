@@ -1,21 +1,34 @@
 <div class="app-container">
   <div class="header">
     <div class="title"><span>Anna</span></div>
-    <div class="lang-container" style="margin-left:auto"><span class="lang">EN</span></div>
+    <div class="lang-container" style="margin-left:auto">
+      <span class="lang">EN</span>
+    </div>
     <div class="lang-container"><span class="lang">FR</span></div>
   </div>
   <div class="content">
     <div class="speech-to-text">
       <div class="box">
-        <span id="final_span" [ngClass]="{displaynone: talking}">Say 'Hey Anna' to begin !</span>
-        <span id="interim_span" [ngClass]="{displaynone: !talking}"></span>
+        <span id="final_span" [ngClass]="{ displaynone: talking }"
+          >Say 'Hey Anna' to begin !</span
+        >
+        <span id="interim_span" [ngClass]="{ displaynone: !talking }"></span>
       </div>
     </div>
     <div class="results-container">
-      results
+      <table>
+        <tr>
+          <td>Item Name</td>
+          <td>Item Type</td>
+        </tr>
+        <tr>
+          <td>{{ itemName }}</td>
+          <td>{{ type }}</td>
+        </tr>
+      </table>
     </div>
   </div>
 </div>
 <div class="mic-container">
-  <i class="fas fa-microphone" [ngClass]="{active: talking}"></i>
+  <i class="fas fa-microphone" [ngClass]="{ active: talking }"></i>
 </div>

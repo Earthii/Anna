@@ -58,6 +58,17 @@
     }
     .results-container {
       flex: 0.8;
+      display: flex;
+      table {
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 20px;
+        tr {
+          td {
+            padding: 10px;
+          }
+        }
+      }
     }
   }
 }
