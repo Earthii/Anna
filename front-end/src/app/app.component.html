@@ -30,8 +30,8 @@
           <th class="bin">Throw away in <i class="far fa-question-circle"></i>:</th>
         </tr>
         <tr>
-          <td class="item-name">{{ itemName.toUpperCase() }}</td>
-          <td class="item-type" >{{ type.toUpperCase() }}</td>
+          <td class="item-name">{{ itemName?.toUpperCase() }}</td>
+          <td class="item-type" >{{ type?.toUpperCase() }}</td>
           <td class="bin" *ngIf="type == 'compost'"> <img src="../assets/compost.jpg"> </td>
           <td class="bin" *ngIf="type == 'recycling'"> <img src="../assets/recycling.png"> </td>
           <td class="bin" *ngIf="type == 'garbage'"> <img src="../assets/garbage.jpg"> </td>
