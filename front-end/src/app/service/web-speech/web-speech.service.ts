@@ -10,14 +10,28 @@ interface IWindow extends Window {
 })
 export class WebSpeechService {
   recognition = null;
-  final_transcript: string;
+  final_transcript = '';
   callback: Function;
 
   constructor() {
+    this.initWebSpeechAPI();
+  }
+
+  subscribe(callback: Function) {
+    this.callback = callback;
+    this.recognition.start();
+  }
+
+  private userStoppedTalking() {
+    this.callback(this.final_transcript);
+  }
+
+  private initWebSpeechAPI() {
     const { webkitSpeechRecognition }: IWindow = <IWindow>window;
     this.recognition = new webkitSpeechRecognition();
     this.recognition.continuous = true; // when the user stops talking, speech recognition will NOT end
     this.recognition.interimResults = true;
+    this.recognition.lang = 'en-US';
 
     this.recognition.onresult = event => {
       let interim_transcript = '';
@@ -41,19 +55,13 @@ export class WebSpeechService {
         ? this.linebreak(interim_transcript)
         : 'Listening...';
     };
-  }
 
-  subscribe(callback: Function) {
-    this.callback = callback;
-
-    this.final_transcript = '';
-    this.recognition.lang = 'en-US';
-    this.recognition.start();
-  }
-
-  private userStoppedTalking() {
-    // this.recognition.stop();
-    this.callback(this.final_transcript);
+    this.recognition.onsoundend = event => {
+      delete this.recognition;
+      console.log('reset webkitSpeechRecognition');
+      this.initWebSpeechAPI();
+      this.recognition.start();
+    };
   }
 
   private capitalize(s) {
