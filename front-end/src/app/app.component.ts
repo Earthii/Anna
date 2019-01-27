@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   type = '';
   itemName = '';
   talking = false;
+  loading = false;
   constructor(
     private webSpeech: WebSpeechService,
     private wasteWizard: WasteWizardService,
@@ -24,14 +25,16 @@ export class AppComponent implements OnInit {
       () => {
         this.zone.run(() => {
           this.talking = true;
+          this.loading = false;
         });
       },
       sentence => {
         this.talking = false;
         this.wasteWizard
-          .analyze(sentence)
-          .subscribe((data: { category: any; item: string }) => {
-            this.zone.run(() => {
+        .analyze(sentence)
+        .subscribe((data: { category: any; item: string }) => {
+          this.zone.run(() => {
+            this.loading = true;
               if (data.category === false) {
                 this.type = '';
                 this.itemName = 'Sorry, no results were found';

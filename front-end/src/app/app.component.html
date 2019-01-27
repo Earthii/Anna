@@ -6,17 +6,24 @@
   </div>
   <div class="content">
     <div class="speech-to-text">
-      <span id="final_span"></span>
-      <span id="interim_span"></span>
+      <div class="box">
+        <span id="final_span" [ngClass]="{displaynone: talking}">Say 'Hey Anna' to begin !</span>
+        <span id="interim_span" [ngClass]="{displaynone: !talking}"></span>
+      </div>
     </div>
     <div class="results-container">
-        <ul>
+        <ul [ngClass]="{loading: loading}">
             <li></li>
             <li></li>
             <li></li>
             <li></li>
             <li></li>
-          </ul>
+        </ul>
+
+        <div [ngClass]="{loading: !loading}"> 
+          <h2>{{ itemName }}</h2>
+          <h2>{{ type }} </h2>
+        </div>
     </div>
   </div>
 </div>
