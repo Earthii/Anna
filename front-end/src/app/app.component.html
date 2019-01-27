@@ -1,32 +1,29 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div [className]="'container'">
-  <div [className]="'header'">
-    <!-- <a><img [className]="'logo'" src="../assets/td-logo.png"></a> -->
-    <h1 [className]="'title'">Welcome to {{ title }}</h1>
-    <label><input type="checkbox" [className]="'toggleLanguage'" value="value">Enable French</label>
+<div class="app-container">
+  <div class="header">
+    <div class="title"><span>Anna</span></div>
+    <div class="lang-container" style="margin-left:auto"><span class="lang">EN</span></div>
+    <div class="lang-container"><span class="lang">FR</span></div>
   </div>
-  
-  <!-- <div [className]="'searchContainer'">
-    <a href="#" [className]="'btn'" (click)="toggleRecord()"><i class="fas fa-microphone"></i></a>
-    <div [className]="'input'" id="interim_span">Listening...</div>
-  </div> -->
-
-  <div [className]="'resultContainer'">
-    <div [className]="'micContainer'" (click)="toggleRecord()">
-        <i class="fas fa-microphone"></i>
+  <div class="content">
+    <div class="centered">
+      <!-- <h2 id="final_span"></h2> -->
+      <div class="top">
+        <div class="mic-container">
+          <i class="fas fa-microphone"></i>
+        </div>
+        <div class="textbox">
+          text box
+        </div>
+      </div>
+      <div class="bottom">
+        <div class="item-name">
+          Item name
+        </div>
+        <div class="bin-container">
+          Bin category
+        </div>
+      </div>
+      <!-- <h2 id="interim_span"></h2>     -->
     </div>
-    <div id="interim_span"></div>
-    <div id="final_span"></div>
   </div>
-
-
-</div>
-<button id="start" (click)="toggleRecord()">
-  Toggle Recognition
-</button>
-<h1>Speech text: </h1>
-<h2 id="interim_span">interim</h2>
-<h2 id="final_span">final</h2>
-<div>
-  {{result | json}}
 </div>
