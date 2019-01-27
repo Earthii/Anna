@@ -122,9 +122,12 @@
 
       table {
         flex: 1 1 100%; 
-        padding: 0px 20px 120px 20px;
+        padding: 0px 20px 100px 20px;
         text-align: center;
         tr {
+          th {
+            color: #f4c739;
+          }
           .item-name { 
             width: 30%;
           }
@@ -137,7 +140,7 @@
             img {
               display: block;
               max-width: 100%;
-              height: auto;
+              height: 200px;
               margin: 0 auto;
             }
           }

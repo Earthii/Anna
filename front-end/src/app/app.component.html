@@ -25,21 +25,22 @@
         </ul>
       <table [ngClass]="{loading: !loading, loadingOntoScreen: loading}">
         <tr>
-          <th class="item-name">Item Name</th>
-          <th class="item-type">Item Type</th>
-          <th class="bin">Throw away in</th>
+          <th class="item-name">Item Name <i class="fas fa-clipboard-list"></i>:</th>
+          <th class="item-type">Item Type <i class="fas fa-exclamation-triangle"></i>:</th>
+          <th class="bin">Throw away in <i class="far fa-question-circle"></i>:</th>
         </tr>
         <tr>
-          <td class="item-name">{{ itemName }}</td>
-          <td class="item-type" >{{ type }}</td>
+          <td class="item-name">{{ itemName.toUpperCase() }}</td>
+          <td class="item-type" >{{ type.toUpperCase() }}</td>
           <td class="bin" *ngIf="type == 'compost'"> <img src="../assets/compost.jpg"> </td>
-          <td class="bin" *ngIf="type == 'recycling'"> <img src="../assets/recycling.jpg"> </td>
+          <td class="bin" *ngIf="type == 'recycling'"> <img src="../assets/recycling.png"> </td>
           <td class="bin" *ngIf="type == 'garbage'"> <img src="../assets/garbage.jpg"> </td>
           <td class="bin" *ngIf="type == 'metal items'"> <img src="../assets/scrape_metal_recyclers.jpg"> </td>
           <td class="bin" *ngIf="type == 'depot'"> depot </td>
           <td class="bin" *ngIf="type == 'hhw'"> <img src="../assets/hhw.jpg"> </td>
           <td class="bin" *ngIf="type == 'oversize'"> oversize </td>
           <td class="bin" *ngIf="type == 'not accepted'"> <img src="../assets/not_accepted.jpg"></td>
+          <td class="bin" *ngIf="type == '' "> <img src="../assets/idk.jpg" style="height: 225px;"></td>
         </tr>
       </table>
       
