@@ -1,5 +1,6 @@
+import { WasteWizardService } from './service/waste-wizard/waste-wizard.service';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { WebSpeechService } from './service/web-speech/web-speech.service';
-import { WatsonService } from './service/watson/watson.service';
 import { Component, OnInit, NgZone } from '@angular/core';
 
 @Component({
@@ -9,21 +10,38 @@ import { Component, OnInit, NgZone } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'Anna';
-  result;
+  type = '';
+  itemName = '';
+  talking = false;
   constructor(
     private webSpeech: WebSpeechService,
-    private watson: WatsonService,
+    private wasteWizard: WasteWizardService,
     private zone: NgZone
   ) {}
 
   ngOnInit() {
-    this.webSpeech.subscribe(sentence => {
-      this.watson.analyze(sentence).subscribe(data => {
+    this.webSpeech.subscribe(
+      () => {
         this.zone.run(() => {
-          this.result = data;
+          this.talking = true;
         });
-        console.log(this.result);
-      });
-    });
+      },
+      sentence => {
+        this.talking = false;
+        this.wasteWizard
+          .analyze(sentence)
+          .subscribe((data: { category: any; item: string }) => {
+            this.zone.run(() => {
+              if (data.category === false) {
+                this.type = '';
+                this.itemName = 'Sorry, no results were found';
+              } else {
+                this.type = data.category;
+                this.itemName = data.item;
+              }
+            });
+          });
+      }
+    );
   }
 }

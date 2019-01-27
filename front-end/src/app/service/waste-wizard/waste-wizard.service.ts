@@ -4,9 +4,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class WatsonService {
-  // url = 'https://anna-2019.herokuapp.com/api/watson';
-  url = 'http://localhost:3000/api/watson';
+export class WasteWizardService {
+  url = 'http://localhost:3000/api/waste-wizard';
 
   constructor(private http: HttpClient) {}
 

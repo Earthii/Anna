@@ -10,56 +10,56 @@ interface IWindow extends Window {
 })
 export class WebSpeechService {
   recognition = null;
-  final_transcript: string;
-  callback: Function;
-
+  final_transcript = '';
+  start_callback: Function;
+  stop_callback: Function;
   constructor() {
-    const { webkitSpeechRecognition }: IWindow = <IWindow>window;
-    this.recognition = new webkitSpeechRecognition();
-    this.recognition.continuous = true; // when the user stops talking, speech recognition will NOT end
-    this.recognition.interimResults = true;
-
-    this.recognition.onresult = event => {
-      let interim_transcript = '';
-      for (let i = event.resultIndex; i < event.results.length; ++i) {
-        if (event.results[i].isFinal) {
-          this.final_transcript = event.results[i][0].transcript;
-          setTimeout(() => {
-            this.userStoppedTalking();
-          }, 1000);
-        } else {
-          interim_transcript += event.results[i][0].transcript;
-        }
-      }
-      this.final_transcript = this.capitalize(this.final_transcript);
-
-      const interim_span = document.getElementById('interim_span');
-      const final_span = document.getElementById('final_span');
-
-      final_span.innerHTML = this.linebreak(this.final_transcript);
-      interim_span.innerHTML = this.linebreak(interim_transcript);
-    };
-
-    this.recognition.onspeechstart = event => {
-      console.log('speech start');
-    };
-
-    this.recognition.onspeechend = event => {
-      console.log('speech end');
-    };
+    this.initWebSpeechAPI();
   }
 
-  subscribe(callback: Function) {
-    this.callback = callback;
-
-    this.final_transcript = '';
-    this.recognition.lang = 'en-US';
+  subscribe(start_callback: Function, stop_callback: Function) {
+    this.start_callback = start_callback;
+    this.stop_callback = stop_callback;
     this.recognition.start();
   }
 
   private userStoppedTalking() {
-    // this.recognition.stop();
-    this.callback(this.final_transcript);
+    this.stop_callback(this.final_transcript);
+  }
+
+  private initWebSpeechAPI() {
+    const { webkitSpeechRecognition }: IWindow = <IWindow>window;
+    this.recognition = new webkitSpeechRecognition();
+    this.recognition.continuous = true; // when the user stops talking, speech recognition will NOT end
+    this.recognition.interimResults = true;
+    this.recognition.lang = 'en-US';
+
+    this.recognition.onresult = event => {
+      this.start_callback();
+      let interim_transcript = '';
+      const interim_span = document.getElementById('interim_span');
+      const final_span = document.getElementById('final_span');
+      final_span.innerHTML = '';
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+        if (event.results[i].isFinal) {
+          this.final_transcript = event.results[i][0].transcript;
+          this.final_transcript = this.capitalize(this.final_transcript);
+          final_span.innerHTML = this.linebreak(this.final_transcript);
+
+          this.userStoppedTalking();
+        } else {
+          interim_transcript += event.results[i][0].transcript;
+        }
+      }
+      interim_span.innerHTML = this.linebreak(interim_transcript);
+    };
+
+    this.recognition.onsoundend = event => {
+      delete this.recognition;
+      console.log('reset webkitSpeechRecognition');
+      this.initWebSpeechAPI();
+      this.recognition.start();
+    };
   }
 
   private capitalize(s) {

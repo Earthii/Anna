@@ -1,22 +1,19 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div [className]="'container'">
-  <div [className]="'header'">
-    <!-- <a><img [className]="'logo'" src="../assets/td-logo.png"></a> -->
-    <h1 [className]="'title'">Welcome to {{ title }}</h1>
-    <label><input type="checkbox" [className]="'toggleLanguage'" value="value">Enable French</label>
+<div class="app-container">
+  <div class="header">
+    <div class="title"><span>Anna</span></div>
+    <div class="lang-container" style="margin-left:auto"><span class="lang">EN</span></div>
+    <div class="lang-container"><span class="lang">FR</span></div>
   </div>
-  <div [className]="'searchContainer'">
-    <input [className]="'input'" type="input" placeholder="Say your garbage sir">   
-    <a href="#" [className]="'btn'"><i class="fas fa-search"></i></a>
+  <div class="content">
+    <div class="speech-to-text">
+      <span id="final_span"></span>
+      <span id="interim_span"></span>
+    </div>
+    <div class="results-container">
+      results
+    </div>
   </div>
-
 </div>
-<button id="start" (click)="toggleRecord()">
-  Toggle Recognition
-</button>
-<h1>Speech text: </h1>
-<h2 id="interim_span">interim</h2>
-<h2 id="final_span">final</h2>
-<div>
-  {{result | json}}
+<div class="mic-container">
+  <i class="fas fa-microphone" [ngClass]="{active: talking}"></i>
 </div>

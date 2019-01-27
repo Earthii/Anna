@@ -4,7 +4,7 @@ var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-lan
 var CategoryService = require('../services/CategoryService.js');
 
 /* GET users listing. */
-router.get('/watson', function(req, res, next) {
+router.get('/waste-wizard', function(req, res, next) {
   var naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
     version: '2018-11-16',
     iam_apikey: process.env.WATSON_API_KEY,
@@ -27,15 +27,21 @@ router.get('/watson', function(req, res, next) {
     if (err) {
       res.send(err);
     } else {
-      res.send(response);
+      const keywords = response.keywords;
+      const filteredKeywords = keywords.filter(item => {
+        return item.text.toLowerCase() !== 'anna';
+      });
+      if (filteredKeywords[0]) {
+        this.itemName = filteredKeywords[0].text;
+        res.send({
+          category: CategoryService.getCategory(itemName),
+          item: itemName
+        });
+      } else {
+        res.send({ category: false });
+      }
     }
-    // console.log(JSON.stringify(response, null, 2));
   });
-});
-
-router.get('/category/:item', function(req, res) {
-  console.log(req.params);
-  res.send(CategoryService.getCategory(req.params.item));
 });
 
 module.exports = router;

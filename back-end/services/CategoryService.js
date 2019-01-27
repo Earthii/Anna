@@ -1,10 +1,10 @@
-var pluralize = require("pluralize");
-const validResult = ["garbage", "compost", "recycling"];
+var pluralize = require('pluralize');
+const validResult = ['garbage', 'compost', 'recycling'];
 
 class CategoryService {
   static loadData() {
-    var fs = require("fs");
-    var contents = fs.readFileSync("./data/data.json");
+    var fs = require('fs');
+    var contents = fs.readFileSync('./data/data.json');
     var data = JSON.parse(contents);
     return data;
   }
