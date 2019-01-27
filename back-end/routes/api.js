@@ -12,7 +12,7 @@ router.get('/watson', function(req, res, next) {
   });
 
   var parameters = {
-    text: 'Hey Anna where does this apple go',
+    text: req.query.sentence,
     features: {
       keywords: {
         sentiment: true,

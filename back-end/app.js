@@ -4,12 +4,19 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var cors = require('cors');
 
 var index = require('./routes/index');
 var api = require('./routes/api');
 
 var app = express();
 require('dotenv').config();
+app.use(
+  cors({
+    origin: ['http://localhost:4200', 'https://earthii.github.io'],
+    credentials: true
+  })
+);
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
