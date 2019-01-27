@@ -5,24 +5,10 @@
     <div class="lang-container"><span class="lang">FR</span></div>
   </div>
   <div class="content">
-    <div class="centered">
-      <div class="top">
-        <div class="mic-container">
-          <i class="fas fa-microphone"></i>
-        </div>
-        <div class="textbox">
-          <h2 id="final_span"></h2>
-          <h2 id="interim_span"></h2>    
-        </div>
-      </div>
-      <div class="bottom">
-        <div class="item-name">
-          {{itemName}}
-        </div>
-        <div class="bin-container">
-          {{type}}
-        </div>
-      </div>
-    </div>
+    <span id="final_span"></span>
+    <span id="interim_span"></span>
   </div>
+</div>
+<div class="mic-container">
+  <i class="fas fa-microphone" [ngClass]="{active: talking}"></i>
 </div>

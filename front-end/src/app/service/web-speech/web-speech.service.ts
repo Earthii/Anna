@@ -11,19 +11,21 @@ interface IWindow extends Window {
 export class WebSpeechService {
   recognition = null;
   final_transcript = '';
-  callback: Function;
+  start_callback: Function;
+  stop_callback: Function;
 
   constructor() {
     this.initWebSpeechAPI();
   }
 
-  subscribe(callback: Function) {
-    this.callback = callback;
+  subscribe(start_callback: Function, stop_callback: Function) {
+    this.start_callback = start_callback;
+    this.stop_callback = stop_callback;
     this.recognition.start();
   }
 
   private userStoppedTalking() {
-    this.callback(this.final_transcript);
+    this.stop_callback(this.final_transcript);
   }
 
   private initWebSpeechAPI() {
@@ -34,6 +36,7 @@ export class WebSpeechService {
     this.recognition.lang = 'en-US';
 
     this.recognition.onresult = event => {
+      this.start_callback();
       let interim_transcript = '';
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {

@@ -2,7 +2,7 @@
   height: 100%;
   .header {
     display: flex;
-    height: 50px;
+    height: 70px;
     background: linear-gradient(to right, #f8dd88, #f4c739);
     div {
       display: flex;
@@ -29,42 +29,25 @@
   .content {
     display: flex;
     flex-direction: column;
-    height: calc(100% - 50px);
-    .centered {
-      display: flex;
-      flex-direction: column;
-      margin: auto;
-      width: 80%;
-      //   h2 {
-      //     text-align: center;
-      //   }
-      .top {
-        display: flex;
-        .mic-container {
-          width: 250px;
-          height: 250px;
-          background-color: black;
-          border-radius: 50%;
-          display: flex;
-          .fa-microphone {
-            margin: auto;
-            font-size: 210px;
-            color: #f4c739;
-          }
-        }
-        .textbox {
-          flex: 1;
-        }
-      }
-      .bottom {
-        display: flex;
-        .item-name {
-          width: 250px;
-        }
-        .bin-container {
-          flex: 1;
-        }
-      }
-    }
+    height: calc(100% - 70px);
+  }
+}
+
+.mic-container {
+  background-color: black;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  height: 80px;
+  width: 80px;
+  display: flex;
+  .fa-microphone {
+    font-size: 50px;
+    color: white;
+    margin: auto;
+  }
+  .active {
+    color: #f4c739;
   }
 }

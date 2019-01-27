@@ -12,6 +12,7 @@ export class AppComponent implements OnInit {
   title = 'Anna';
   type = '';
   itemName = '';
+  talking = false;
   constructor(
     private webSpeech: WebSpeechService,
     private wasteWizard: WasteWizardService,
@@ -19,20 +20,28 @@ export class AppComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.webSpeech.subscribe(sentence => {
-      this.wasteWizard
-        .analyze(sentence)
-        .subscribe((data: { category: any; item: string }) => {
-          this.zone.run(() => {
-            if (data.category === false) {
-              this.type = '';
-              this.itemName = 'Sorry, no results were found';
-            } else {
-              this.type = data.category;
-              this.itemName = data.item;
-            }
-          });
+    this.webSpeech.subscribe(
+      () => {
+        this.zone.run(() => {
+          this.talking = true;
         });
-    });
+      },
+      sentence => {
+        this.talking = false;
+        this.wasteWizard
+          .analyze(sentence)
+          .subscribe((data: { category: any; item: string }) => {
+            this.zone.run(() => {
+              if (data.category === false) {
+                this.type = '';
+                this.itemName = 'Sorry, no results were found';
+              } else {
+                this.type = data.category;
+                this.itemName = data.item;
+              }
+            });
+          });
+      }
+    );
   }
 }
