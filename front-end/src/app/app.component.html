@@ -1,32 +1,51 @@
 <div class="app-container">
   <div class="header">
     <div class="title"><span>Anna</span></div>
-    <div class="lang-container" style="margin-left:auto"><span class="lang">EN</span></div>
+    <div class="lang-container" style="margin-left:auto">
+      <span class="lang">EN</span>
+    </div>
     <div class="lang-container"><span class="lang">FR</span></div>
   </div>
   <div class="content">
     <div class="speech-to-text">
       <div class="box">
-        <span id="final_span" [ngClass]="{displaynone: talking}">Say 'Hey Anna' to begin !</span>
-        <span id="interim_span" [ngClass]="{displaynone: !talking}"></span>
+        <span id="final_span" [ngClass]="{ displaynone: talking }"
+          >Say 'Hey Anna' to begin !</span
+        >
+        <span id="interim_span" [ngClass]="{ displaynone: !talking }"></span>
       </div>
     </div>
     <div class="results-container">
-        <ul [ngClass]="{loading: loading}">
+        <ul [ngClass]="{loading: loading, loadOntoScreen: !loading}">
             <li></li>
             <li></li>
             <li></li>
             <li></li>
             <li></li>
         </ul>
-
-        <div [ngClass]="{loading: !loading}"> 
-          <h2>{{ itemName }}</h2>
-          <h2>{{ type }} </h2>
-        </div>
+      <table [ngClass]="{loading: !loading, loadingOntoScreen: loading}">
+        <tr>
+          <th class="item-name">Item Name</th>
+          <th class="item-type">Item Type</th>
+          <th class="bin">Throw away in</th>
+        </tr>
+        <tr>
+          <td class="item-name">{{ itemName }}</td>
+          <td class="item-type" >{{ type }}</td>
+          <td class="bin" *ngIf="type == 'compost'"> <img src="../assets/compost.jpg"> </td>
+          <td class="bin" *ngIf="type == 'recycling'"> <img src="../assets/recycling.jpg"> </td>
+          <td class="bin" *ngIf="type == 'garbage'"> <img src="../assets/garbage.jpg"> </td>
+          <td class="bin" *ngIf="type == 'metal items'"> <img src="../assets/scrape_metal_recyclers.jpg"> </td>
+          <td class="bin" *ngIf="type == 'depot'"> depot </td>
+          <td class="bin" *ngIf="type == 'hhw'"> <img src="../assets/hhw.jpg"> </td>
+          <td class="bin" *ngIf="type == 'oversize'"> oversize </td>
+          <td class="bin" *ngIf="type == 'not accepted'"> <img src="../assets/not_accepted.jpg"></td>
+        </tr>
+      </table>
+      
     </div>
   </div>
 </div>
 <div class="mic-container">
-  <i class="fas fa-microphone" [ngClass]="{active: talking}"></i>
+  <i class="fas fa-microphone" [ngClass]="{ active: talking }"></i>
 </div>

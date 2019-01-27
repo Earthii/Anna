@@ -33,8 +33,8 @@ export class AppComponent implements OnInit {
         this.wasteWizard
         .analyze(sentence)
         .subscribe((data: { category: any; item: string }) => {
+          this.loading = true;
           this.zone.run(() => {
-            this.loading = true;
               if (data.category === false) {
                 this.type = '';
                 this.itemName = 'Sorry, no results were found';

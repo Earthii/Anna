@@ -56,7 +56,6 @@
         }
       }
     }
-
     .results-container{
       display: flex;
       flex: 1 1 70%;
@@ -88,6 +87,8 @@
 
       ul {
         display: flex;
+        flex: 1 1 100%;
+        justify-content: center;
         li {
           width: 20px;
           height: 20px;
@@ -107,6 +108,40 @@
       }
       .loading {
         display: none;
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 0.8s linear, opacity 0.8s linear;
+      }
+
+      .loadOntoScreen{ 
+        display: flex;
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 1s, opacity 0.7s linear;
+      }
+
+      table {
+        flex: 1 1 100%; 
+        padding: 0px 20px 120px 20px;
+        text-align: center;
+        tr {
+          .item-name { 
+            width: 30%;
+          }
+          .item-type {
+            width: 30%;
+          }
+          .bin {
+            width: 40%;
+
+            img {
+              display: block;
+              max-width: 100%;
+              height: auto;
+              margin: 0 auto;
+            }
+          }
+        }
       }
     }
   }
