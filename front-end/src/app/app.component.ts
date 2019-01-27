@@ -12,6 +12,10 @@ export class AppComponent implements OnInit {
   constructor(private webSpeech: WebSpeechService) {}
 
   ngOnInit() {
+  }
+  
+  toggleRecord(){
     this.webSpeech.toggle();
   }
+
 }

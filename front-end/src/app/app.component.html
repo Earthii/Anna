@@ -5,10 +5,20 @@
     <h1 [className]="'title'">Welcome to {{ title }}</h1>
     <label><input type="checkbox" [className]="'toggleLanguage'" value="value">Enable French</label>
   </div>
-  <div [className]="'searchContainer'">
-    <input [className]="'input'" type="input" placeholder="Say your garbage sir">   
-    <a href="#" [className]="'btn'"><i class="fas fa-search"></i></a>
+  
+  <!-- <div [className]="'searchContainer'">
+    <a href="#" [className]="'btn'" (click)="toggleRecord()"><i class="fas fa-microphone"></i></a>
+    <div [className]="'input'" id="interim_span">Listening...</div>
+  </div> -->
+
+  <div [className]="'resultContainer'">
+    <div [className]="'micContainer'" (click)="toggleRecord()">
+        <i class="fas fa-microphone"></i>
+    </div>
+    <div id="interim_span"></div>
+    <div id="final_span"></div>
   </div>
+
 
 </div>
 <button id="start" (click)="toggleRecord()">

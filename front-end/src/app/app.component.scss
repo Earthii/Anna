@@ -8,9 +8,9 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    height: 100px;
+    height: 80px;
     background: linear-gradient(to right, #f8dd88, #f4c739);
-    border: 3px solid black;
+    border: 2px solid black;
 }
 
 .title {
@@ -93,13 +93,45 @@ input:checked[type="checkbox"]:after{
     justify-content: space-between;
     height: 50px;
     margin-top: 20px;
-    .input {
-        flex: 1 1 75%;
-        padding-right: 10px;
-        border: 3px solid black;
+    .btn {
+        flex: 0 0 5%;
+        border: 1px solid black;
+        padding-top: 8px;
+        font-size: 25px;
+        color: #f4c739;
+        background-color: black;
     }
 
-    .btn {
-        flex: 1 0 5%;
+    .input {
+        flex: 1 1 75%;
+        border: 2px solid black;
+        margin-left: 10px;
+        padding-left: 10px;
+        color: grey;
+        padding: 10px;
+        text-align: left;
+    }
+}
+
+.resultContainer{
+    margin-top: 10px;
+    border: 2px solid black;
+    height: 500px;
+
+    .micContainer {
+        width: 320px;
+        height: 320px;
+        background-color: black;
+        border-radius: 50%;
+        margin: 30px auto 0;
+    }
+
+    .fa-microphone {
+        border: 1px solid black;
+        padding-top: 50px;
+        font-size: 210px;
+        color: #f4c739;
+        border: none;
+        text-align: center;
     }
 }

@@ -36,7 +36,7 @@ export class WebSpeechService {
       const final_span = document.getElementById('final_span');
 
       final_span.innerHTML = this.linebreak(this.final_transcript);
-      interim_span.innerHTML = this.linebreak(interim_transcript);
+      interim_span.innerHTML = this.linebreak(interim_transcript) ? this.linebreak(interim_transcript) : 'Listening...';
     };
 
     this.recognition.onspeechstart = event => {
