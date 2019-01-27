@@ -1,4 +1,5 @@
 var pluralize = require("pluralize");
+const validResult = ["garbage", "compost", "recycling"];
 
 class CategoryService {
   static loadData() {
@@ -9,13 +10,9 @@ class CategoryService {
   }
 
   static getCategory(input) {
-    var validResult = ["garbage", "compost", "recycling"];
     var input = input.toLowerCase();
-    var singular = pluralize.singular(input);
-    var plural = pluralize.plural(input);
-
-    var singularResult = global.garbageData[singular];
-    var pluralResult = global.garbageData[plural];
+    var singularResult = global.garbageData[pluralize.singular(input)];
+    var pluralResult = global.garbageData[pluralize.plural(input)];
 
     if (validResult.includes(singularResult)) {
       return singularResult;
