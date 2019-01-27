@@ -1,18 +1,19 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
+var NaturalLanguageUnderstandingV1 = require("watson-developer-cloud/natural-language-understanding/v1.js");
+var CategoryService = require("../services/CategoryService.js");
 
 /* GET users listing. */
-router.get('/watson', function(req, res, next) {
+router.get("/watson", function(req, res, next) {
   var naturalLanguageUnderstanding = new NaturalLanguageUnderstandingV1({
-    version: '2018-11-16',
+    version: "2018-11-16",
     iam_apikey: process.env.WATSON_API_KEY,
     url:
-      'https://gateway-wdc.watsonplatform.net/natural-language-understanding/api'
+      "https://gateway-wdc.watsonplatform.net/natural-language-understanding/api"
   });
 
   var parameters = {
-    text: 'Hey Anna where does this apple go',
+    text: "Hey Anna where does this apple go",
     features: {
       keywords: {
         sentiment: true,
@@ -30,6 +31,11 @@ router.get('/watson', function(req, res, next) {
     }
     // console.log(JSON.stringify(response, null, 2));
   });
+});
+
+router.get("/category/:item", function(req, res) {
+  console.log(req.params);
+  res.send(CategoryService.getCategory(req.params.item));
 });
 
 module.exports = router;
