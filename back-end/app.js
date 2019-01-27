@@ -11,12 +11,14 @@ var api = require('./routes/api');
 
 var app = express();
 require('dotenv').config();
+
 app.use(
   cors({
     origin: ['http://localhost:4200', 'https://earthii.github.io'],
     credentials: true
   })
 );
+require('dotenv').config();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -49,5 +51,9 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+var fs = require('fs');
+var contents = fs.readFileSync('./data/data.json');
+global.garbageData = JSON.parse(contents);
 
 module.exports = app;

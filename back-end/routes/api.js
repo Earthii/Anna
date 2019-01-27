@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var NaturalLanguageUnderstandingV1 = require('watson-developer-cloud/natural-language-understanding/v1.js');
+var CategoryService = require('../services/CategoryService.js');
 
 /* GET users listing. */
 router.get('/watson', function(req, res, next) {
@@ -30,6 +31,11 @@ router.get('/watson', function(req, res, next) {
     }
     // console.log(JSON.stringify(response, null, 2));
   });
+});
+
+router.get('/category/:item', function(req, res) {
+  console.log(req.params);
+  res.send(CategoryService.getCategory(req.params.item));
 });
 
 module.exports = router;
