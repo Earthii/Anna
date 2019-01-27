@@ -30,8 +30,11 @@
     display: flex;
     flex-direction: column;
     height: calc(100% - 70px);
-    #interim_span {
-      color: #6b6b6b;
+    .speech-to-text {
+      text-align: center;
+      #interim_span {
+        color: #6b6b6b;
+      }
     }
   }
 }

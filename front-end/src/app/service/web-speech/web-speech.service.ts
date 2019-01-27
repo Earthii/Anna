@@ -13,7 +13,6 @@ export class WebSpeechService {
   final_transcript = '';
   start_callback: Function;
   stop_callback: Function;
-
   constructor() {
     this.initWebSpeechAPI();
   }
@@ -38,23 +37,21 @@ export class WebSpeechService {
     this.recognition.onresult = event => {
       this.start_callback();
       let interim_transcript = '';
+      const interim_span = document.getElementById('interim_span');
+      const final_span = document.getElementById('final_span');
+      final_span.innerHTML = '';
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
           this.final_transcript = event.results[i][0].transcript;
+          this.final_transcript = this.capitalize(this.final_transcript);
+          final_span.innerHTML = this.linebreak(this.final_transcript);
+
           this.userStoppedTalking();
         } else {
           interim_transcript += event.results[i][0].transcript;
         }
       }
-      this.final_transcript = this.capitalize(this.final_transcript);
-
-      const interim_span = document.getElementById('interim_span');
-      const final_span = document.getElementById('final_span');
-
-      final_span.innerHTML = this.linebreak(this.final_transcript);
-      interim_span.innerHTML = this.linebreak(interim_transcript)
-        ? this.linebreak(interim_transcript)
-        : 'Listening...';
+      interim_span.innerHTML = this.linebreak(interim_transcript);
     };
 
     this.recognition.onsoundend = event => {
