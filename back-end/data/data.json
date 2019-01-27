@@ -2828,5 +2828,8 @@
   "garland (real)": "compost",
   "wreath (real)": "compost",
   "plastic contact lens cases": "garbage",
-  "contact lens blister packs": "garbage"
+  "contact lens blister packs": "garbage",
+  "apple": "compost",
+  "orange": "compost",
+  "banana": "compost"
 }
