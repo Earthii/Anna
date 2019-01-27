@@ -33,9 +33,8 @@ router.get('/watson', function(req, res, next) {
   });
 });
 
-router.get('/category/:item', function(req, res) {
-  console.log(req.params);
-  res.send(CategoryService.getCategory(req.params.item));
+router.get('/category', function(req, res) {
+  res.send({ category: CategoryService.getCategory(req.query.item) });
 });
 
 module.exports = router;
