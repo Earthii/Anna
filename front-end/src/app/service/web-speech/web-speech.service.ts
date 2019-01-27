@@ -41,9 +41,7 @@ export class WebSpeechService {
       for (let i = event.resultIndex; i < event.results.length; ++i) {
         if (event.results[i].isFinal) {
           this.final_transcript = event.results[i][0].transcript;
-          setTimeout(() => {
-            this.userStoppedTalking();
-          }, 1000);
+          this.userStoppedTalking();
         } else {
           interim_transcript += event.results[i][0].transcript;
         }
