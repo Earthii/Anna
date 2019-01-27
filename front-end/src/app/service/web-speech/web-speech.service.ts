@@ -11,6 +11,7 @@ interface IWindow extends Window {
 export class WebSpeechService {
   recognition = null;
   final_transcript: string;
+  callback: Function;
 
   constructor() {
     const { webkitSpeechRecognition }: IWindow = <IWindow>window;
@@ -47,7 +48,10 @@ export class WebSpeechService {
       console.log('speech end');
     };
   }
-  toggle() {
+
+  subscribe(callback: Function) {
+    this.callback = callback;
+
     this.final_transcript = '';
     this.recognition.lang = 'en-US';
     this.recognition.start();
@@ -55,6 +59,7 @@ export class WebSpeechService {
 
   private userStoppedTalking() {
     // this.recognition.stop();
+    this.callback(this.final_transcript);
   }
 
   private capitalize(s) {

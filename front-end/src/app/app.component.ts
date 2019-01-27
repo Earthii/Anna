@@ -1,5 +1,6 @@
 import { WebSpeechService } from './service/web-speech/web-speech.service';
-import { Component, OnInit } from '@angular/core';
+import { WatsonService } from './service/watson/watson.service';
+import { Component, OnInit, NgZone } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'Anna';
-
-  constructor(private webSpeech: WebSpeechService) {}
+  result;
+  constructor(
+    private webSpeech: WebSpeechService,
+    private watson: WatsonService,
+    private zone: NgZone
+  ) {}
 
   ngOnInit() {
+    this.webSpeech.subscribe(sentence => {
+      this.watson.analyze(sentence).subscribe(data => {
+        this.zone.run(() => {
+          this.result = data;
+        });
+        console.log(this.result);
+      });
+    });
   }
-  
-  toggleRecord(){
-    this.webSpeech.toggle();
-  }
-
 }
