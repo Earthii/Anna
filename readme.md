@@ -5,3 +5,6 @@ Anna is our ConUHacks 2019 project which aims to improve sustainable cities. We 
 ## How is it built
 
 Anna is built with Angular and Express, powered by Watson NLP, Webspeech API and a dataset.
+
+## .env file
+You will need a `WATSON_API_KEY` variable
